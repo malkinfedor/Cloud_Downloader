@@ -31,6 +31,7 @@
   {
     global $filename, $argument1, $arr;
     echo $arr[0];
+    echo $arr[1];
     echo $filename;
     $command = "nohup wget $(/usr/bin/yadisk-direct \"{$arr[0]}\") -O \"{$filename}\" 2>&1 & "; // > /dev/null
 	passthru("{$command}");

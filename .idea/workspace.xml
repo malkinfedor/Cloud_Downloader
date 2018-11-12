@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6662c90-b3f2-4b65-9a5c-aa934793b423" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/docker/nginx.docker" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/docker/nginx.docker" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/downloader_mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/downloader_mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/test_args.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/test_call_php.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/downloader_yandex.php" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/downloader_yandex.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,13 +52,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="93" />
-          <entry key="php" value="385" />
+          <entry key="php" value="395" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="91" />
-          <entry key="PHP" value="385" />
+          <entry key="PHP" value="395" />
           <entry key="SQL" value="2" />
         </counts>
       </usages-collector>
@@ -111,7 +105,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
@@ -120,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/downloader_yandex.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="11" />
+            <state relative-caret-position="495">
+              <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
               <folding>
                 <element signature="n#pathcombine#0;n#!!top" />
               </folding>
@@ -240,12 +234,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1542009716042</updated>
-      <workItem from="1542009717418" duration="5592000" />
+      <workItem from="1542009717418" duration="5782000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5592000" />
+    <option name="totallyTimeSpent" value="5782000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
@@ -342,16 +336,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/downloader_yandex.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="11" />
-          <folding>
-            <element signature="n#pathcombine#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/input.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -371,6 +355,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="31" column="17" lean-forward="true" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/downloader_yandex.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding>
+            <element signature="n#pathcombine#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
