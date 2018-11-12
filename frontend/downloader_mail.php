@@ -1,33 +1,35 @@
 <?php
   $links_file = "links.txt";
-//  $storage_path = "downloads";
-
-  $storage_path = "/volume2/Downloads_new";
+//  $storage_path = "/volume2/Downloads_new";
+  $storage_path = "./";
   $file4aria = "input.txt";
+  $bin_dir = "/usr/bin/";
   $aria2c = "aria2c";
   $current_dir = dirname(__FILE__);
-//  $current_dir = '/volume1/web/Downloader';
-
+  //  $current_dir = '/volume1/web/Downloader';
 
 $argument1 = $_GET['links'];
 
-
-
 echo $argument1 . PHP_EOL;;
 
-  // ======================================================================================================== //
+// ======================================================================================================== //
 
   $file4aria = pathcombine($current_dir, $file4aria);
-  $aria2c = pathcombine($current_dir, $aria2c);
+  $aria2c = pathcombine($bin_dir, $aria2c);
+
+  if (is_dir($storage_path))
+  {
+    echo "Dir is true";
+  }
+  else{
+    echo "Dir is false" . PHP_EOL;
+    exit("Dir isn't exist ($storage_path)");
+  }
 
   if (file_exists($file4aria)) unlink($file4aria);
 
   echo "Start create input file for Aria2c Downloader..." . PHP_EOL;
-  // foreach($links as $link)
-//  foreach($argv as $argument)
-//   {
- //   $argument1 = $argument;
-	echo $argument1;
+echo $argument1;
 	$link = $argument1;
     $base_url = "";
     $id = "";
@@ -117,6 +119,7 @@ echo $argument1 . PHP_EOL;;
 
   // ======================================================================================================== //
 
+  //function StartDownload($link,$filename)
   function StartDownload()
   {
     global $aria2c, $file4aria;

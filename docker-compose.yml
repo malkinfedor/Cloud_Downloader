@@ -6,15 +6,27 @@ services:
             dockerfile: nginx.docker
         volumes:
             - ./frontend:/var/www/html
+            - ./test:/var/www/html/test
         ports:
             - "8080:80"
+        working_dir: /var/www/html
 
-    # develop-php-cli:
-    #     build:
-    #         context: ./frontend/docker
-    #         dockerfile: php-cli.docker
-    #     volumes:
-    #         - ./api:/var/www/api
-    #         - ./storage:/var/www/storage
-    #     working_dir: /var/www/api
-    #     tty: true
+    nginx-test:
+        build:
+            context: ./frontend/docker
+            dockerfile: nginx.docker
+        volumes:
+            - ./test:/var/www/html/
+        ports:
+            - "8081:80"
+        working_dir: /var/www/html
+
+    develop-php-cli:
+        image: php:7.1-cli
+        # build:
+        #     context: ./frontend/docker
+        #     dockerfile: php-cli.docker
+        volumes:
+            - ./test:/var/www/test
+        working_dir: /var/www/test
+        tty: true
