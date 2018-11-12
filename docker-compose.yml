@@ -22,10 +22,10 @@ services:
         working_dir: /var/www/html
 
     develop-php-cli:
-        image: php:7.1-cli
-        # build:
-        #     context: ./frontend/docker
-        #     dockerfile: php-cli.docker
+        #image: php:7.1-cli
+        build:
+            context: ./test/docker
+            dockerfile: php-cli.docker
         volumes:
             - ./test:/var/www/test
         working_dir: /var/www/test

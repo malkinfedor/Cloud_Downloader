@@ -20,6 +20,16 @@
 
   $arr = explode("\n", $argument1);
   $first_link = explode(";", $arr[0]);
+  //echo "Link is $first_link[0]";
+  //echo "FileName is $first_link[1]";
+
+//  if (empty($first_link[1])) {
+//      echo "Arr1 is empty";
+//  }
+//  else{
+//      echo "Arr1 is NOT empty";
+//  }
+
   StartDownload();
 
   echo "Downloading in background job..." . PHP_EOL;
@@ -30,12 +40,14 @@
   function StartDownload()
   {
     global $filename, $argument1, $arr;
-    echo $arr[0];
-    echo $arr[1];
-    echo $filename;
-    $command = "nohup wget $(/usr/bin/yadisk-direct \"{$arr[0]}\") -O \"{$filename}\" 2>&1 & "; // > /dev/null
-	passthru("{$command}");
-	//exec("{$command}");
+    //if ($arr[1])) unlink($file4aria);
+
+
+    // Check dir with this name doesn't exif or exit with code 1
+    // $command = "nohup wget $(/usr/bin/yadisk-direct \"{$arr[0]}\") -O \"{$filename}\".zip 2>&1 & "; // > /dev/null
+    $command = "nohup sh -c  'wget $(/usr/bin/yadisk-direct \"{$arr[0]}\") -O \"{$filename}\".zip && mkdir \"{$filename}\" && unzip \"{$filename}\".zip -d \"{$filename}\"' 2>&1 &";
+	//passthru("{$command}");
+	exec("{$command}");
   }
 
   // ======================================================================================================== //
