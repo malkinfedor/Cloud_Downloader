@@ -1,0 +1,20 @@
+version: '3'
+services:
+    nginx:
+        build:
+            context: ./frontend/docker
+            dockerfile: nginx.docker
+        volumes:
+            - ./frontend:/var/www/html
+        ports:
+            - "8080:80"
+
+    # develop-php-cli:
+    #     build:
+    #         context: ./frontend/docker
+    #         dockerfile: php-cli.docker
+    #     volumes:
+    #         - ./api:/var/www/api
+    #         - ./storage:/var/www/storage
+    #     working_dir: /var/www/api
+    #     tty: true

@@ -11,6 +11,8 @@
 
 $argument1 = $_GET['links'];
 
+
+
 echo $argument1 . PHP_EOL;;
 
   // ======================================================================================================== //
@@ -19,7 +21,6 @@ echo $argument1 . PHP_EOL;;
   $aria2c = pathcombine($current_dir, $aria2c);
 
   if (file_exists($file4aria)) unlink($file4aria);
-  $links = file($links_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
   echo "Start create input file for Aria2c Downloader..." . PHP_EOL;
   // foreach($links as $link)
