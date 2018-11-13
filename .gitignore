@@ -1,1 +1,4 @@
-.idea
+frontend/test*
+.idea/
+*.zip
+

@@ -1,8 +1,7 @@
 <?php
   $links_file = "links.txt";
   //$storage_path = "/volume2/Downloads_new";
-  $storage_path = "./";
-
+  $storage_path = "../";
   $bin_dir = "/usr/bin/";
   $yadisk_direct = "yadisk-direct";
   $current_dir = dirname(__FILE__);
@@ -10,7 +9,9 @@
   $argument1 = $_GET['links'];
   $filename = $_GET['file_name'];
 
-  echo $argument1 . PHP_EOL;;
+  //echo $argument1 . PHP_EOL;;
+  //echo htmlentities('<p>' . $argument1 . '</p>');
+  //echo '<br>';
 
   // ======================================================================================================== //
 
@@ -32,7 +33,9 @@
 
   StartDownload();
 
-  echo "Downloading in background job..." . PHP_EOL;
+  //echo htmlentities('<p>' . "Downloading in background job..." . '</p>');
+  //echo '<br>';
+  //echo "Downloading in background job..." . PHP_EOL;
 
   // ======================================================================================================== //
 

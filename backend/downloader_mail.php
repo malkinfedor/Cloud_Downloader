@@ -1,7 +1,8 @@
 <?php
   $links_file = "links.txt";
 //  $storage_path = "/volume2/Downloads_new";
-  $storage_path = "./";
+  $base_path = "/var/www/html";
+  $storage_path = "../";
   $file4aria = "input.txt";
   $bin_dir = "/usr/bin/";
   $aria2c = "aria2c";
@@ -19,7 +20,8 @@ echo $argument1 . PHP_EOL;;
 
   if (is_dir($storage_path))
   {
-    echo "Dir is true";
+    echo "Dir $storage_path is true";
+
   }
   else{
     echo "Dir is false" . PHP_EOL;
