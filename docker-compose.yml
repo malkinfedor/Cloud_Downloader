@@ -2,19 +2,20 @@ version: '3'
 services:
     nginx:
         build:
-            context: ./frontend/docker
+            context: ./docker
             dockerfile: nginx.docker
         volumes:
             - ./frontend:/var/www/html
             - ./test:/var/www/html/test
             - ./backend:/var/www/backend
+            - ./downloads:/var/www/downloads
         ports:
             - "8080:80"
         working_dir: /var/www/html
 
     nginx-test:
         build:
-            context: ./frontend/docker
+            context: ./docker
             dockerfile: nginx.docker
         volumes:
             - ./test:/var/www/html/

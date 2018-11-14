@@ -4,7 +4,9 @@ $argument1 = $_GET['links'];
 
   // Получим каждую строку в массив $arr, к нему можем получить доступ через $arr[x]
   $lines = explode("\n", $argument1);
-  
+  $lenthgt = count($lines);
+  echo $lenthgt;
+  echo '<br>';
   // Разделим полученные строки на имя файла и ссылку
   foreach($lines as $line){
     echo "A line is $line" . PHP_EOL;

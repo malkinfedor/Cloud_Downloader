@@ -38,6 +38,8 @@ $lines = explode("\n", $textarea);
    $number_of_lines = count($lines);
    if ($number_of_lines > 1) {
       $use_textarea_filename = true;
+      echo "Number of links more than one";
+      echo '<br>';
    }
 
 // Разделим полученные строки на имя файла и ссылку

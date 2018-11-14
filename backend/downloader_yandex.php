@@ -9,8 +9,8 @@
   $argument1 = $_GET['links'];
   $filename = $_GET['file_name'];
 
-  //echo $argument1 . PHP_EOL;;
-  //echo htmlentities('<p>' . $argument1 . '</p>');
+  //echo $textarea . PHP_EOL;;
+  //echo htmlentities('<p>' . $textarea . '</p>');
   //echo '<br>';
 
   // ======================================================================================================== //
@@ -42,7 +42,7 @@
 
   function StartDownload()
   {
-    global $filename, $argument1, $arr;
+    global $filename, $textarea, $arr;
     //if ($arr[1])) unlink($file4aria);
 
 

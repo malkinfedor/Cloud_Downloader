@@ -1,4 +1,5 @@
 frontend/test*
 .idea/
 *.zip
-
+.DS_Store
+downloads
