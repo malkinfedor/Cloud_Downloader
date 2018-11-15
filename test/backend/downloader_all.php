@@ -67,53 +67,44 @@ foreach($lines as $line){
         echo '<br>';
         echo '<br>';
         echo '<br>';
-
-        $command = "nohup php /var/www/backend/download_mail.php \"{$link}\" \"{$filename}\" > /dev/null 2>&1 &";
-        exec("{$command}");
-
-        //StartDownloadMail($link, $filename);
+        StartDownloadMail($link, $filename);
     }
 
     else{
         exit("This link ($link) is incorrect");
         echo '<br>';
     }
-//sleep(30);
+
 }
 // ======================================================================================================== //
 function StartDownloadMail($link, $filename)
 {
-  global $storage_path, $aria2c, $file4aria;
-    $storage_path_end = pathcombine($storage_path, $filename);
+  global $file4aria, $storage_path, $aria2c, $file4aria;
+    //$storage_path = pathcombine($storage_path, $filename);
+    if (file_exists($file4aria)) unlink($file4aria);
 
-    $random = (string) random_int(1, 100);
-    $file4aria_end = $file4aria . $random;
-    //if (file_exists($file4aria)) unlink($file4aria);
-    echo "File4Aria_End is $file4aria_end";
-    echo '<br/>';
     echo "Start create input file for Aria2c Downloader..." . PHP_EOL;
 
     if ($files = GetAllFiles($link)) {
-
         foreach ($files as $file) {
-
             $line = $file->download_link . PHP_EOL;
             $line .= "  out=" . $file->output . PHP_EOL;
             $line .= "  referer=" . $link . PHP_EOL;
-            $line .= "  dir=" . $storage_path_end . PHP_EOL;
+            $line .= "  dir=" . $storage_path . PHP_EOL;
 
-            file_put_contents($file4aria_end, $line, FILE_APPEND);
+            file_put_contents($file4aria, $line, FILE_APPEND);
         }
     }
 
     echo "Running Aria2c for download..." . PHP_EOL;
 
-    $command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria_end}\" ";
-
+    $command = "nohup \"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" & ";
     exec("{$command}");
 
-    //@unlink($file4aria_end);
+    StartDownload();
+    @unlink($file4aria);
 
+    echo "Done!" . PHP_EOL;
 }
 
 // ======================================================================================================== //
@@ -162,7 +153,6 @@ function StartDownloadYandex($link,$filename,$storage_path)
     if (($mainfolder = GetMainFolder($page)) === false) { echo "Cannot get main folder $link\r\n"; return false; }
 
     if (!$base_url) $base_url = GetBaseUrl($page);
-    echo "Base URL is $base_url";
     if (!$id && preg_match('~\/public\/(.*)~', $link, $match)) $id = $match[1];
 
     $cmfiles = array();

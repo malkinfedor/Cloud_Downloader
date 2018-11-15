@@ -1,7 +1,0 @@
-FROM richarvey/nginx-php-fpm
-
-RUN apk add python3 && wget https://bootstrap.pypa.io/get-pip.py && \
-python3 get-pip.py && pip3 install wldhx.yadisk-direct && apk add aria2
-
-ADD ./nginx/default.conf /etc/nginx/sites-available/default.conf
-WORKDIR /var/www/html

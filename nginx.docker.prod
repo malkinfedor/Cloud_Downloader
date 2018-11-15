@@ -3,11 +3,10 @@ FROM richarvey/nginx-php-fpm
 RUN apk add python3 && wget https://bootstrap.pypa.io/get-pip.py && \
 python3 get-pip.py && pip3 install wldhx.yadisk-direct && apk add aria2
 
-RUN mkdir  /var/www/downloads/ && chown nginx: /var/www/downloads/
-
 COPY frontend/ /var/www/html/
 COPY backend/ /var/www/backend/
 
+RUN mkdir  /var/www/downloads/ && chown nginx: /var/www/downloads/ && chown nginx: /var/www/backend && chown nginx: /var/www/html && rm -rf /var/www/html/index.php && rm -rf rm -rf /var/www/html/get-pip.py
 
 ADD ./docker/nginx/default.conf /etc/nginx/sites-available/default.conf
 WORKDIR /var/www/html

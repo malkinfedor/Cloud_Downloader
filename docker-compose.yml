@@ -2,8 +2,9 @@ version: '3'
 services:
     nginx:
         build:
-            context: ./docker
-            dockerfile: nginx.docker
+            context: ./
+            dockerfile: nginx.docker.prod
+        image: cloud-downloader
         volumes:
             - ./frontend:/var/www/html
             - ./test:/var/www/html/test
@@ -15,10 +16,11 @@ services:
 
     nginx-test:
         build:
-            context: ./docker
+            context: ./test
             dockerfile: nginx.docker
         volumes:
             - ./test:/var/www/html/
+            # - ./downloads:/var/www/backend
         ports:
             - "8081:80"
         working_dir: /var/www/html

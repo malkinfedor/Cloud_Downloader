@@ -1,0 +1,7 @@
+FROM richarvey/nginx-php-fpm
+
+COPY frontend/ /var/www/html/
+COPY backend/ /var/www/backend/
+
+ADD ./docker/nginx/default.conf /etc/nginx/sites-available/default.conf
+WORKDIR /var/www/html
