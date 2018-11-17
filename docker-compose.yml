@@ -14,12 +14,19 @@ services:
             - "8080:80"
         working_dir: /var/www/html
 
+    frontend-nodejs:
+        image: node:10.11-jessie
+        volumes:
+            - ./frontend_temp/frontend:/var/www/frontend
+        working_dir: /var/www/frontend
+        tty: true
+
     nginx-test:
         build:
             context: ./test
             dockerfile: nginx.docker
         volumes:
-            - ./test:/var/www/html/
+            - ./frontend_temp/frontend/dist:/var/www/html/
             # - ./downloads:/var/www/backend
         ports:
             - "8081:80"
