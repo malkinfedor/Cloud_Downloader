@@ -62,6 +62,7 @@ foreach($lines as $line){
         echo 'This link from yadi.sk';
         echo '<br>';
         StartDownloadYandex($link, $filename, $storage_path);
+
     } elseif (strpos($link, 'mail.ru') !== false){
         echo 'This link from mail.ru';
         echo '<br>';
@@ -78,63 +79,30 @@ foreach($lines as $line){
         exit("This link ($link) is incorrect");
         echo '<br>';
     }
-
-// echo"<html>";
-// echo"   <head>";
-// echo"      <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css' rel='stylesheet'>";
-// echo"   </head>";
-// echo"   <body>";
-// echo"      <div class='container-fluid'>";
-// echo"         <div class='row'>";
-// echo"            <div class='col-md-12'>";
-// echo"               <h3 class='text-center text-primary'>PHP Form Builder</h3>";
-// echo"               <div class='row'>";
-// echo"                  <div class='col-md-6'>";
-// echo"                     <div class='panel panel-primary'>";
-// echo"                        <div class='panel-heading'>";
-// echo"                           <h3 class='panel-title'>Components</h3>";
-// echo"                        </div>";
-// echo"                        <div class='panel-body'>";
-// echo"                           <label class='col-md-4 control-label' for='input01'>Text input</label>";
-// echo"                           <input id='txt_textInput' type='text' placeholder='title' class='form-control input-md'>";
-// echo"                           <p class='help-block'></p>";
-// echo"                           <button id='btn_textInput' type='button' class='col-md-4 btn btn-info'>Add</button> ";
-// echo"                        </div>";
-// echo"                        <div class='panel-footer'></div>";
-// echo"                     </div>";
-// echo"                     <button type='button' class='btn btn-warning btn-block'>Reset Form</button>";
-// echo"                  </div>";
-// echo"                  <div class='col-md-6'>";
-// echo"                     <div class='panel panel-info'>";
-// echo"                        <div class='panel-heading'>";
-// echo"                           <h3 class='panel-title'>From Preview</h3>";
-// echo"                        </div>";
-// echo"                        <div class='panel-body'>";
-// echo"                        </div>";
-// echo"                        <div class='panel-footer'></div>";
-// echo"                     </div>";
-// echo"                     <button type='button' class='btn btn-block btn-success'>Save</button>";
-// echo"                  </div>";
-// echo"               </div>";
-// echo"            </div>";
-// echo"         </div>";
-// echo"      </div>";
-// echo"      <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js'></script>";
-// echo"   </body>";
-// echo"</html>";
+//sleep(30);
 }
+  $command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" ";
 
+  exec("{$command}");
 
+// ======================================================================================================== //
+
+function CreateInputFileForAria($link, $filename, $storage_path)
+{
+  global $file4aria
+    $line = $link . PHP_EOL;
+    $line .= "  out=" . $filename . PHP_EOL;
+    $line .= "  referer=" . PHP_EOL;
+    $line .= "  dir=" . $storage_path . 
+    file_put_contents($file4aria, $line, FILE_APPEND);
+}
 // ======================================================================================================== //
 function StartDownloadMail($link, $filename)
 {
   global $storage_path, $aria2c, $file4aria;
     $storage_path_end = pathcombine($storage_path, $filename);
 
-    $random = (string) random_int(1, 100);
-    $file4aria_end = $file4aria . $random;
-    //if (file_exists($file4aria)) unlink($file4aria);
-    echo "File4Aria_End is $file4aria_end";
+    echo "File4Aria is $file4aria";
     echo '<br/>';
     echo "Start create input file for Aria2c Downloader..." . PHP_EOL;
 
@@ -147,15 +115,15 @@ function StartDownloadMail($link, $filename)
             $line .= "  referer=" . $link . PHP_EOL;
             $line .= "  dir=" . $storage_path_end . PHP_EOL;
 
-            file_put_contents($file4aria_end, $line, FILE_APPEND);
+            file_put_contents($file4aria, $line, FILE_APPEND);
         }
     }
 
-    echo "Running Aria2c for download..." . PHP_EOL;
+    // echo "Running Aria2c for download..." . PHP_EOL;
 
-    $command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria_end}\" ";
+    // $command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" ";
 
-    exec("{$command}");
+    // exec("{$command}");
 
     //@unlink($file4aria_end);
 
@@ -169,7 +137,10 @@ function StartDownloadYandex($link,$filename,$storage_path)
     echo "Link is $link and Filename is $filename";
     echo '<br>';
     $filename = pathcombine($storage_path, $filename);
-    $command = "nohup sh -c  'wget $(/usr/bin/yadisk-direct \"{$link}\") -O \"{$filename}\".zip && mkdir \"{$filename}\" && unzip \"{$filename}\".zip -d \"{$filename}\" && rm -rf \"{$filename}\".zip' 2>&1 &";
+    $command = "nohup sh -c  'wget $(/usr/bin/yadisk-direct \"{$link}\") -O \"{$filename}\".zip && mkdir \"{$filename}\" && unzip \"{$filename}\".zip -d \"{$filename}\" && rm -rf \"{$filename}\".zip' 2>&1 | tee -a /tmp/mylog 2>/dev/null >/dev/null &";
+    
+    
+
 //    $command = "wget $(/usr/bin/yadisk-direct \"{$link}\") -O \"{$filename}\".zip";
     echo "Command is $command";
     echo '<br>';
