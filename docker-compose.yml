@@ -4,7 +4,7 @@ services:
         build:
             context: ./
             dockerfile: nginx.docker.prod
-        image: cloud-downloader
+        image: malkinfedor/cloud-downloader
         volumes:
             - ./frontend:/var/www/html
             - ./test:/var/www/html/test

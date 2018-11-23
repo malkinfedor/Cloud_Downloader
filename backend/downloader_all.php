@@ -51,12 +51,9 @@ foreach($lines as $line){
 
     // If number of lines more than 1 so we will use filename from textarea.
     // Else if field filename is filled  so we will use its value
-    if ($use_textarea_filename) {
+    if (($use_textarea_filename) or (empty($filename))) {
         $filename = $line_split[1];
     }
-//    else{
-//        if (!(empty($filename))) ($filename = );
-//    }
 
     if (strpos($link, 'yadi.sk') !== false) {
         echo 'This link from yadi.sk';
@@ -81,19 +78,26 @@ foreach($lines as $line){
     }
 //sleep(30);
 }
-  $command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" ";
 
-  exec("{$command}");
+echo "Start download in MAIN function </br>" ;
+$command = "nohup sh -c  '\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" ' 2>&1 | tee -a /tmp/mylog 2>/dev/null >/dev/null &";
+
+//$command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" ";
+exec("{$command}");
+echo "StartED download in MAIN function";
+sleep(10);
+@unlink($file4aria);
 
 // ======================================================================================================== //
 
 function CreateInputFileForAria($link, $filename, $storage_path)
 {
-  global $file4aria
+  global $file4aria;
+    echo "Storage path is $storage_path";
     $line = $link . PHP_EOL;
-    $line .= "  out=" . $filename . PHP_EOL;
+    $line .= "  out=" . $filename . ".zip" . PHP_EOL;
     $line .= "  referer=" . PHP_EOL;
-    $line .= "  dir=" . $storage_path . 
+    $line .= "  dir=" . $storage_path . PHP_EOL;
     file_put_contents($file4aria, $line, FILE_APPEND);
 }
 // ======================================================================================================== //
@@ -118,15 +122,6 @@ function StartDownloadMail($link, $filename)
             file_put_contents($file4aria, $line, FILE_APPEND);
         }
     }
-
-    // echo "Running Aria2c for download..." . PHP_EOL;
-
-    // $command = "\"{$aria2c}\" --file-allocation=none --check-certificate=false --max-connection-per-server=10 --split=10 --max-concurrent-downloads=10 --summary-interval=0 --continue --user-agent=\"Mozilla/5.0 (compatible; Firefox/3.6; Linux)\" --input-file=\"{$file4aria}\" ";
-
-    // exec("{$command}");
-
-    //@unlink($file4aria_end);
-
 }
 
 // ======================================================================================================== //
@@ -136,17 +131,17 @@ function StartDownloadYandex($link,$filename,$storage_path)
 {
     echo "Link is $link and Filename is $filename";
     echo '<br>';
-    $filename = pathcombine($storage_path, $filename);
-    $command = "nohup sh -c  'wget $(/usr/bin/yadisk-direct \"{$link}\") -O \"{$filename}\".zip && mkdir \"{$filename}\" && unzip \"{$filename}\".zip -d \"{$filename}\" && rm -rf \"{$filename}\".zip' 2>&1 | tee -a /tmp/mylog 2>/dev/null >/dev/null &";
-    
-    
+    #$filename = pathcombine($storage_path, $filename);
+    //$command = "nohup sh -c  'wget $(/usr/bin/yadisk-direct \"{$link}\") -O \"{$filename}\".zip && mkdir \"{$filename}\" && unzip \"{$filename}\".zip -d \"{$filename}\" && rm -rf \"{$filename}\".zip' 2>&1 | tee -a /tmp/mylog 2>/dev/null >/dev/null &";
+    $command = "/usr/bin/yadisk-direct \"{$link}\" ";
 
-//    $command = "wget $(/usr/bin/yadisk-direct \"{$link}\") -O \"{$filename}\".zip";
     echo "Command is $command";
     echo '<br>';
-    exec("{$command}");
-    echo "Task for download from this link $link is started and work in background";
+    $link_end_yandex = shell_exec("{$command}");
+    echo "Task for download from this link $link_end_yandex is started and work in background";
     echo '<br>';
+
+    CreateInputFileForAria($link_end_yandex, $filename, $storage_path);
 }
 
 // ======================================================================================================== //
