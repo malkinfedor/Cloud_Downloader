@@ -3,3 +3,4 @@ frontend/test*
 *.zip
 .DS_Store
 downloads
+node_modules
